@@ -1,0 +1,42 @@
+.div_log{
+    position:absolute;
+    width: 200px;
+    height: 100%;
+    float: left;
+    background-color:#555555
+}
+
+.div_diff{
+    height: 100px;
+    float:left;
+    background-color:#ff5555
+}
+
+.ace_editor {
+    border: 1px solid lightgray;
+    height:800px;
+    width: 80%;
+}
+.scroll_margin {
+    height: 80px;
+    text-align: center;
+}
+
+
+.div_log{
+    height:100px;
+    width:20%;
+    background-color:#000000
+}
+
+.div_diff{
+    width:80%;
+    display:flex;
+    flex-direction:column
+}
+
+.div_head{
+    height:100px;
+    width:100%;
+    background-color:#f1fa8c
+}
