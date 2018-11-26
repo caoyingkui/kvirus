@@ -1,6 +1,6 @@
-var log_editor;
-var diff_editor;
-var stompClient;
+let log_editor;
+let diff_editor;
+let stompClient;
 
 function initailaize(){
     log_editor_initialize();
@@ -8,39 +8,23 @@ function initailaize(){
     connect();
 
 
+
+
 }
 
 function connect(){
-    var socket = new SockJS('/gs-guide-websocket')
+    let socket = new SockJS('/gs-guide-websocket')
     stompClient = Stomp.over(socket)
     stompClient.connect({}, function(frame){
-        stompClient.subscribe("/message/logs", update_log_editor());
-        stompClient.subscribe("/message/diffs", update_diff_files());
+        stompClient.subscribe("/message/commit", update_commit);
+        stompClient.subscribe("/message/diff_file", update_files);
+        stompClient.subscribe("/message/diff", update_diff);
     });
 }
 
-function log_editor_initialize(){
-    //这里的路径好奇怪，好像是按照html的位置进行寻址的，而不是js
-    require.config({paths: {"ace": "lib/ace"}});
-    // load ace and extensions
-    require(["ace/ace"], function (ace) {
-        log_editor = ace.edit("log_editor");
-        log_editor.setOptions({
-            autoScrollEditorIntoView: true,
-            maxLines: 50,
-            minLines:1
-        });
-        console.log("in");
-        log_editor.renderer.setScrollMargin(10, 10, 10, 10);
-        log_editor.setHighlightActiveLine(false);
-        //log_editor.session.selection.on("changeCursor", onEditor);
-        log_editor.setValue("code to search!");
-        //code_editor.session.addMarker(new Range(1,0, 3, 2), "ace_active-line", "fullLine");
-    });
-}
 
 function diff_editor_initialize(){
-    var diff_editor = new AceDiff({
+    diff_editor = new AceDiff({
         element: '.acediff',
         left: {
             content: 'your first file content here',
@@ -51,14 +35,27 @@ function diff_editor_initialize(){
     });
 }
 
-function update_log_editor(logs){
-    log_editor.setValue(logs);
+function update_commit(commits){
+    $("commit").innerText ="";
+    $.each(commits, function(index, commit){
+        $("commit").append("<option>" + commit +"</option>")
+    });
 }
 
-function update_diff_files(files){
-    var former = files["former"];
-    var latter = files["latter"];
-    left.content = former;
-    right.content = latter;
+function update_files(files){
+    $("diff_file").innerText = "";
+    $.each(files, function(index, file){
+        $("diff_file").append("option" + file + "<>");
+    });
+
+}
+
+
+function update_diff(diff){
+    let former = diff["former"];
+    let latter = diff["latter"];
+
+    diff_editor.left.content = former;
+    diff_editor.right.content = latter;
 }
 

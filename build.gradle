@@ -25,7 +25,7 @@ repositories {
 
 
 dependencies {
-    compile fileTree(dir:'lib',includes:['*jar'])
+    compile fileTree(dir: 'lib', includes: ['*jar'])
     implementation('org.springframework.boot:spring-boot-starter-webflux')
     runtimeOnly('org.springframework.boot:spring-boot-devtools')
     compileOnly('org.projectlombok:lombok')
@@ -40,8 +40,11 @@ dependencies {
     compile group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.0.13.Final'
     compile group: 'org.webjars', name: 'stomp-websocket', version: '2.3.0'
     compile group: 'org.webjars', name: 'sockjs-client', version: '1.0.2'
-
-
+    compile group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '5.1.0.201809111528-r'
+    compile group: 'org.json', name: 'json', version: '20160810'
+    compile group: 'org.springframework', name: 'spring-messaging', version: '5.0.8.RELEASE'
+    compile group: 'org.springframework', name: 'spring-web', version: '5.0.8.RELEASE'
+    compile group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.core', version: '3.10.0'
 
 
 
